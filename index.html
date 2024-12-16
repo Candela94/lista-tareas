@@ -5,40 +5,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de tareas</title>
+
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
 </head>
 
 <style>
     body {
         font-family: poppins;
-        margin: 32px;
+        margin: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
     }
 
-    #formTarea{
-       
+
+
+
+
+    .Main {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        align-items: center;
     }
+
+
+
+
+    .formuCompleto {
+        padding: 24px;
+        border-radius: 20px;
+
+        background-color: rgb(250, 252, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+
+
+
+
+
 
 
     #formTarea button {
+
         font-family: poppins;
-        padding: 8px;
-        border-radius: 8px;
+
+
         border: none;
-        background-color: rgb(131, 88, 170);
+        background-color: rgb(58, 58, 58);
+        color: beige;
     }
+
+
+
+
+
+    #formTarea button span {
+        font-size: 20px;
+    }
+
+
+
+
+
 
 
     #formTarea input {
         font-family: poppins;
-        padding: 8px;
+        margin: 12px;
+
+        padding: 10px;
         border-radius: 8px;
         border: none;
-        background-color: rgb(222, 200, 243);
+        background-color: rgb(253, 253, 255);
+        border: solid 0.3px black;
+
     }
+
+
+
+    li {
+        margin-bottom: 16px;
+    }
+
+
+
+
 
     #formTarea input:focus {}
 
 
-    .btnOption{
+
+
+    .btnOption {
         font-family: poppins;
         padding: 4px;
         border-radius: 4px;
@@ -47,6 +116,50 @@
     }
 
 
+
+
+
+
+    .btnMenu {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+
+
+
+
+
+    .btnMenu button {
+
+        font-family: poppins;
+        border: none;
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+
+
+
+
+    .btnEliminadas {
+        background-color: rgb(240, 170, 170);
+    }
+
+
+
+
+
+
+    .btnCompletadas {
+        background-color: rgb(176, 237, 176);
+    }
+
+
+    .btnTodas {
+        background-color: rgb(220, 223, 245);
+    }
 </style>
 
 <body>
@@ -54,24 +167,36 @@
 
     <h1>Lista de tareas</h1>
 
-    <div>
-        <ul id="listaTareas">
-            <li>Ingrese tareas en su lista</li>
-            <!-- <li>Tarea 1</li>
-            <li>Tarea 2</li> -->
-        </ul>
-    </div>
+    <main class="Main">
+
+        <div class="formuCompleto">
+
+            <div>
+                <ul id="listaTareas">
+                    <li>Ingrese tareas en su lista</li>
+                    <!-- <li>Tarea 1</li>
+                    <li>Tarea 2</li> -->
+                </ul>
+            </div>
 
 
-    <form id="formTarea">
+            <form id="formTarea">
 
-        <input id="txtTarea" type="text" placeholder="Ingrese una tarea">
-        <button type="submit">Agregar</button>
-
-
-    </form>
+                <input id="txtTarea" type="text" placeholder="Ingrese una tarea">
+                <button type="submit"><span class="material-symbols-outlined">
+                        add</span></button>
 
 
+            </form>
+        </div>
+
+
+        <div class="btnMenu">
+            <button id="eliminadas" class="btnEliminadas">Eliminadas</button>
+            <button id="completadas" class="btnCompletadas">Completadas</button>
+            <button id="todas" class="btnTodas">Mis tareas</button>
+        </div>
+    </main>
 
     <script>
 
@@ -90,6 +215,15 @@
 
         ];
 
+
+        const btnEliminadas = document.getElementById("eliminadas");
+        const btnCompletadas = document.getElementById("completadas");
+        const btnTodas = document.getElementById("todas");
+
+
+        const tareasEliminadas = [];
+
+        let tareaTab = "todas";
 
 
 
@@ -115,8 +249,15 @@
                 boxTareas.innerHTML += ` <li>
                                      <input id="${id}" type= "checkbox" name = "chck_completada" /> 
                                      <label for="${id}">${titulo} </label>
-                                     <button class= "btnOption" onclick = "eliminarTarea(${id})"> X </button>
-                                     <button class= "btnOption" onclick = "completarTarea(${id})"> Completar </button>
+
+                                     <div class= "btnFormu"
+                                     <button class= "btnOption" onclick = "eliminarTarea(${id})"> <span class="material-symbols-outlined">
+                                        delete
+                                        </span> </button>
+                                     <button class= "btnOption" onclick = "completarTarea(${id})"> <span class="material-symbols-outlined">
+                                       
+                                        check
+                                        </span> </button>
                                      </li>
 
                                             `;
@@ -144,8 +285,8 @@
             //listaDeTareas.push(nuevaTarea);  agregamos nuevo item o tarea
 
 
-            const nuevoId = parseInt(Math.random()*100);
-            const objetoTarea = {id: nuevoId, titulo: nuevaTarea, isCompletada: false};
+            const nuevoId = parseInt(Math.random() * 100);
+            const objetoTarea = { id: nuevoId, titulo: nuevaTarea, isCompletada: false };
 
             listaDeTareas.push(objetoTarea);
             mostrarTareas();
@@ -158,10 +299,10 @@
 
 
         function eliminarTarea(idTarea) {
-          
-            listaDeTareas.forEach( (tarea, index) => {
+
+            listaDeTareas.forEach((tarea, index) => {
                 alert("Eliminar tarea: ", + idTarea)
-                if(tarea.id == idTarea){
+                if (tarea.id == idTarea) {
                     const posicion = index;
 
                     listaDeTareas.splice(posicion, 1);
@@ -169,26 +310,26 @@
             });
 
             mostrarTareas();
-         }
+        }
 
 
 
 
 
-        function completarTarea() { 
+        function completarTarea() {
 
             //1.buscar el elemento con el id deseado 
-            const tarea = listaDeTareas.find( (t) => t.id==idTarea);
+            const tarea = listaDeTareas.find((t) => t.id == idTarea);
             console.log("tarea encontrada: ", tarea)
 
             //2.cambiar valor de isCompletada
 
-            if (tarea.isCompletada==true){
-                tarea.isCompletada=false;
+            if (tarea.isCompletada == true) {
+                tarea.isCompletada = false;
             } else {
-                tarea.isCompletada=true
+                tarea.isCompletada = true
             }
-           
+
 
             mostrarTareas();
 
