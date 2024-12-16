@@ -309,26 +309,35 @@
                 }
             });
 
+
+
+            //muestra en pantalla todas las tareas excepto la tarea que es distinta a idTarea
+
+            //listaDetareas = listaDeTareas.filter(  (t) => t.id == idTarea);
+
             mostrarTareas();
+
+
         }
 
 
 
 
 
-        function completarTarea() {
+        function completarTarea(idTarea) {
 
             //1.buscar el elemento con el id deseado 
+
             const tarea = listaDeTareas.find((t) => t.id == idTarea);
             console.log("tarea encontrada: ", tarea)
 
-            //2.cambiar valor de isCompletada
 
-            if (tarea.isCompletada == true) {
-                tarea.isCompletada = false;
-            } else {
-                tarea.isCompletada = true
-            }
+            //a isCompletada le guardo el contrario de tarea isCompletada. esto es lo que significa el (!)
+
+            
+            //tarea.isCompletada = tarea.isCompletada ? false  :  true;
+
+            tarea.isCompletada = !tarea.isCompletada;
 
 
             mostrarTareas();
