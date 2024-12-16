@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+</head>
+
+<style>
+    body {
+        font-family: poppins;
+        margin: 32px;
+    }
+
+    #formTarea{
+       
+    }
+
+
+    #formTarea button {
+        font-family: poppins;
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        background-color: rgb(131, 88, 170);
+    }
+
+
+    #formTarea input {
+        font-family: poppins;
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        background-color: rgb(222, 200, 243);
+    }
+
+    #formTarea input:focus {}
+
+
+    .btnOption{
+        font-family: poppins;
+        padding: 4px;
+        border-radius: 4px;
+        border: none;
+
+    }
+
+
+</style>
+
+<body>
+
+
+    <h1>Lista de tareas</h1>
+
+    <div>
+        <ul id="listaTareas">
+            <li>Ingrese tareas en su lista</li>
+            <!-- <li>Tarea 1</li>
+            <li>Tarea 2</li> -->
+        </ul>
+    </div>
+
+
+    <form id="formTarea">
+
+        <input id="txtTarea" type="text" placeholder="Ingrese una tarea">
+        <button type="submit">Agregar</button>
+
+
+    </form>
+
+
+
+    <script>
+
+        //--------------------------------------------------
+        //1. declaramos las constantes y variables 
+        //--------------------------------------------------
+
+        const formu = document.getElementById("formTarea");
+        const txtTarea = document.getElementById("txtTarea");
+        const boxTareas = document.getElementById("listaTareas");
+
+        const listaDeTareas = [
+            { id: 1, titulo: "Ordenar mi código", isCompletada: true },
+            { id: 524, titulo: "Crear las funciones", isCompletada: false },
+            { id: 1034, titulo: "Programar", isCompletada: false }
+
+        ];
+
+
+
+
+
+        //--------------------------------------------------
+        //2.Funciones 
+        //--------------------------------------------------
+
+        function mostrarTareas() {
+
+            //borramos todo el contenido de la caja
+            boxTareas.innerHTML = "";
+
+
+
+            //cargamos nuevas tareas
+            listaDeTareas.forEach((tarea) => {
+
+
+                const titulo = tarea.titulo;
+                const id = tarea.id;
+                //boxTareas.innerHTML += `<li>${titulo}</li>`;
+                boxTareas.innerHTML += ` <li>
+                                     <input id="${id}" type= "checkbox" name = "chck_completada" /> 
+                                     <label for="${id}">${titulo} </label>
+                                     <button class= "btnOption" onclick = "eliminarTarea(${id})"> X </button>
+                                     <button class= "btnOption" onclick = "completarTarea(${id})"> Completar </button>
+                                     </li>
+
+                                            `;
+
+            });
+
+        }
+
+
+
+        function agregarTarea() {
+
+            const nuevaTarea = txtTarea.value; //el texto del input
+
+            //tarea inválida
+            if (nuevaTarea.trim() == "") {
+                alert("Por favor, ingresa una tarea válida");
+                return;
+            }
+
+            //tarea válida
+
+            txtTarea.value = "";  //vaciamos input despues de enviar una tarea
+
+            //listaDeTareas.push(nuevaTarea);  agregamos nuevo item o tarea
+
+
+            const nuevoId = parseInt(Math.random()*100);
+            const objetoTarea = {id: nuevoId, titulo: nuevaTarea, isCompletada: false};
+
+            listaDeTareas.push(objetoTarea);
+            mostrarTareas();
+
+
+        };
+
+
+
+
+
+        function eliminarTarea(idTarea) {
+          
+            listaDeTareas.forEach( (tarea, index) => {
+                alert("Eliminar tarea: ", + idTarea)
+                if(tarea.id == idTarea){
+                    const posicion = index;
+
+                    listaDeTareas.splice(posicion, 1);
+                }
+            });
+
+            mostrarTareas();
+         }
+
+
+
+
+
+        function completarTarea() { 
+
+            //1.buscar el elemento con el id deseado 
+            const tarea = listaDeTareas.find( (t) => t.id==idTarea);
+            console.log("tarea encontrada: ", tarea)
+
+            //2.cambiar valor de isCompletada
+
+            if (tarea.isCompletada==true){
+                tarea.isCompletada=false;
+            } else {
+                tarea.isCompletada=true
+            }
+           
+
+            mostrarTareas();
+
+        }
+
+
+
+        //--------------------------------------------------
+        //3. eventListeners
+        //--------------------------------------------------
+
+        formu.addEventListener("submit", (event) => {
+
+
+            // //no envies el formulario que quiero hacer cosas antes 
+            event.preventDefault();
+
+            agregarTarea();
+        });
+
+
+        //--------------------------------------------------
+        //4. Llamar a las funciones
+        //--------------------------------------------------
+
+        mostrarTareas();
+
+    </script>
+
+</body>
+
+</html>
