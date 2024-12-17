@@ -7,366 +7,336 @@
     <title>Lista de tareas</title>
 
 
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="./styless.css">
 
 </head>
 
-<style>
-    body {
-        font-family: poppins;
-        margin: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
 
-    }
-
-
-
-
-
-    .Main {
-        display: flex;
-        gap: 40px;
-        justify-content: center;
-        align-items: center;
-    }
-
-
-
-
-    .formuCompleto {
-        padding: 24px;
-        border-radius: 20px;
-
-        background-color: rgb(250, 252, 255);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-
-
-
-
-
-
-
-
-
-    #formTarea button {
-
-        font-family: poppins;
-
-
-        border: none;
-        background-color: rgb(58, 58, 58);
-        color: beige;
-    }
-
-
-
-
-
-    #formTarea button span {
-        font-size: 20px;
-    }
-
-
-
-
-
-
-
-    #formTarea input {
-        font-family: poppins;
-        margin: 12px;
-
-        padding: 10px;
-        border-radius: 8px;
-        border: none;
-        background-color: rgb(253, 253, 255);
-        border: solid 0.3px black;
-
-    }
-
-
-
-    li {
-        margin-bottom: 16px;
-    }
-
-
-
-
-
-    #formTarea input:focus {}
-
-
-
-
-    .btnOption {
-        font-family: poppins;
-        padding: 4px;
-        border-radius: 4px;
-        border: none;
-
-    }
-
-
-
-
-
-
-    .btnMenu {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-    }
-
-
-
-
-
-
-    .btnMenu button {
-
-        font-family: poppins;
-        border: none;
-        padding: 8px;
-        border-radius: 8px;
-    }
-
-
-
-
-
-    .btnEliminadas {
-        background-color: rgb(240, 170, 170);
-    }
-
-
-
-
-
-
-    .btnCompletadas {
-        background-color: rgb(176, 237, 176);
-    }
-
-
-    .btnTodas {
-        background-color: rgb(220, 223, 245);
-    }
-</style>
 
 <body>
 
 
-    <h1>Lista de tareas</h1>
 
     <main class="Main">
 
-        <div class="formuCompleto">
 
-            <div>
-                <ul id="listaTareas">
-                    <li>Ingrese tareas en su lista</li>
-                    <!-- <li>Tarea 1</li>
+
+
+        <!-- home -->
+
+        <div class="Tabs-contenido u-visible" id="btn1">
+            <h1>Lista de tareas</h1>
+
+            <div class="formuCompleto">
+
+                
+                    <ul id="listaTareas">
+                        <li>Ingrese tareas en su lista</li>
+                        <!-- <li>Tarea 1</li>
                     <li>Tarea 2</li> -->
-                </ul>
+                    </ul>
+               
+
+
+                <form id="formTarea">
+
+                    <input id="txtTarea" type="text" placeholder="Ingrese una tarea">
+                    <button type="submit"><span class="material-symbols-outlined">
+                            add</span></button>
+
+
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- lista -->
+
+        <div class="Tabs-contenido" id="btn2">
+            <h1>Mis tareas</h1>
+
+        </div>
+
+
+        <!-- perfil -->
+        <div class="Tabs-contenido " id="btn3">
+
+            <h1>Mi perfil</h1>
+
+            <div class="Acordeon">
+
+                <div class="Acordeon-item">
+                    <div class="Acordeon-header">Seccion 1 </div>
+                    <div class="Acordeon-content">Este es el contenido de la seccion 1</div>
+                </div>
+
+
+                <div class="Acordeon-item">
+                    <div class="Acordeon-header">Seccion 2</div>
+                    <div class="Acordeon-content">Hola este es otro contenido diferente</div>
+                </div>
+
+
+
+                <div class="Acordeon-item">
+                    <div class="Acordeon-header">Seccion 3</div>
+                    <div class="Acordeon-content">Me encanta hacer acordeones jejejje</div>
+                </div>
+
             </div>
 
-
-            <form id="formTarea">
-
-                <input id="txtTarea" type="text" placeholder="Ingrese una tarea">
-                <button type="submit"><span class="material-symbols-outlined">
-                        add</span></button>
-
-
-            </form>
         </div>
 
 
-        <div class="btnMenu">
-            <button id="eliminadas" class="btnEliminadas">Eliminadas</button>
-            <button id="completadas" class="btnCompletadas">Completadas</button>
-            <button id="todas" class="btnTodas">Mis tareas</button>
-        </div>
     </main>
 
-    <script>
+    <div class="Tabs">
+        <ul class="Tabs-buttons">
+            <li data-tab="btn1" class="Tabs-btn"><i class="fa-solid fa-house"></i>
+            </li>
 
-        //--------------------------------------------------
-        //1. declaramos las constantes y variables 
-        //--------------------------------------------------
+            <li data-tab="btn2" class="Tabs-btn"><i class="fa-solid fa-list-ul"></i>
+            </li>
 
-        const formu = document.getElementById("formTarea");
-        const txtTarea = document.getElementById("txtTarea");
-        const boxTareas = document.getElementById("listaTareas");
+            <li data-tab="btn3" class="Tabs-btn"><i class="fa-regular fa-user"></i>
+            </li>
 
-        const listaDeTareas = [
-            { id: 1, titulo: "Ordenar mi código", isCompletada: true },
-            { id: 524, titulo: "Crear las funciones", isCompletada: false },
-            { id: 1034, titulo: "Programar", isCompletada: false }
+        </ul>
 
-        ];
-
-
-        const btnEliminadas = document.getElementById("eliminadas");
-        const btnCompletadas = document.getElementById("completadas");
-        const btnTodas = document.getElementById("todas");
-
-
-        const tareasEliminadas = [];
-
-        let tareaTab = "todas";
+    </div>
 
 
 
 
-        //--------------------------------------------------
-        //2.Funciones 
-        //--------------------------------------------------
-
-        function mostrarTareas() {
-
-            //borramos todo el contenido de la caja
-            boxTareas.innerHTML = "";
 
 
 
-            //cargamos nuevas tareas
-            listaDeTareas.forEach((tarea) => {
 
 
-                const titulo = tarea.titulo;
-                const id = tarea.id;
-                //boxTareas.innerHTML += `<li>${titulo}</li>`;
-                boxTareas.innerHTML += ` <li>
-                                     <input id="${id}" type= "checkbox" name = "chck_completada" /> 
+<script>
+
+    //--------------------------------------------------
+    //1. declaramos las constantes y variables 
+    //--------------------------------------------------
+
+    const formu = document.getElementById("formTarea");
+    const txtTarea = document.getElementById("txtTarea");
+    const boxTareas = document.getElementById("listaTareas");
+
+    
+
+    const headers = document.querySelectorAll(".Acordeon-header");
+    const items = document.querySelectorAll(".Acordeon-item");
+
+
+    const listaBotones = document.querySelectorAll(".Tabs-btn");
+    const listaDePaginas = document.querySelectorAll(".Tabs-contenido");
+
+
+
+    const listaDeTareas = [
+        { id: 1, titulo: "Ordenar mi código", isCompletada: true },
+        { id: 524, titulo: "Crear las funciones", isCompletada: false },
+        { id: 1034, titulo: "Programar", isCompletada: false }
+
+    ];
+
+
+
+
+
+
+    const tareasEliminadas = [];
+    const tareasCompletadas = [];
+
+    let todasMisTareas = "todas";
+
+
+
+
+    //--------------------------------------------------
+    //2.Funciones 
+    //--------------------------------------------------
+
+
+    function tareasYaCompletadas(){
+
+        const btn2 = document.getElementById("btn2");
+        
+        //Filtramos las tareas completadas
+        const tareasCompletadas = listaDeTareas.filter (tarea => tarea.isCompletada);
+        
+        mostrarTareas();
+
+    }
+
+    function mostrarTareas() {
+
+
+        //borramos todo el contenido de la caja
+        boxTareas.innerHTML = "";
+
+
+
+        let tareasMostrar = [];
+
+
+
+
+        //cargamos nuevas tareas
+        listaDeTareas.forEach((tarea) => {
+
+
+            const titulo = tarea.titulo;
+            const id = tarea.id;
+            const isChecked = tarea.isCompletada ? "checked" : "";
+            //boxTareas.innerHTML += `<li>${titulo}</li>`;
+            boxTareas.innerHTML += ` <li>
+                                     <input id="${id}" type= "checkbox" name = "chck_completada" ${isChecked} /> 
                                      <label for="${id}">${titulo} </label>
 
                                      <div class= "btnFormu"
-                                     <button class= "btnOption" onclick = "eliminarTarea(${id})"> <span class="material-symbols-outlined">
-                                        delete
-                                        </span> </button>
-                                     <button class= "btnOption" onclick = "completarTarea(${id})"> <span class="material-symbols-outlined">
-                                       
-                                        check
-                                        </span> </button>
+                                     <button class= "btnOption" id="btnDelete"  onclick = "eliminarTarea(${id})"> <i class="fa-regular fa-trash-can"></i> </button>
+                                     <button class= "btnOption" id="btnCompletar" onclick = "completarTarea(${id})"> <i class="fa-solid fa-check "></i> </button>
                                      </li>
+                                     </div>
 
                                             `;
 
-            });
-
-        }
-
-
-
-        function agregarTarea() {
-
-            const nuevaTarea = txtTarea.value; //el texto del input
-
-            //tarea inválida
-            if (nuevaTarea.trim() == "") {
-                alert("Por favor, ingresa una tarea válida");
-                return;
-            }
-
-            //tarea válida
-
-            txtTarea.value = "";  //vaciamos input despues de enviar una tarea
-
-            //listaDeTareas.push(nuevaTarea);  agregamos nuevo item o tarea
-
-
-            const nuevoId = parseInt(Math.random() * 100);
-            const objetoTarea = { id: nuevoId, titulo: nuevaTarea, isCompletada: false };
-
-            listaDeTareas.push(objetoTarea);
-            mostrarTareas();
-
-
-        };
-
-
-
-
-
-        function eliminarTarea(idTarea) {
-
-            listaDeTareas.forEach((tarea, index) => {
-                alert("Eliminar tarea: ", + idTarea)
-                if (tarea.id == idTarea) {
-                    const posicion = index;
-
-                    listaDeTareas.splice(posicion, 1);
-                }
-            });
-
-
-
-            //muestra en pantalla todas las tareas excepto la tarea que es distinta a idTarea
-
-            //listaDetareas = listaDeTareas.filter(  (t) => t.id == idTarea);
-
-            mostrarTareas();
-
-
-        }
-
-
-
-
-
-        function completarTarea(idTarea) {
-
-            //1.buscar el elemento con el id deseado 
-
-            const tarea = listaDeTareas.find((t) => t.id == idTarea);
-            console.log("tarea encontrada: ", tarea)
-
-
-            //a isCompletada le guardo el contrario de tarea isCompletada. esto es lo que significa el (!)
-
-            
-            //tarea.isCompletada = tarea.isCompletada ? false  :  true;
-
-            tarea.isCompletada = !tarea.isCompletada;
-
-
-            mostrarTareas();
-
-        }
-
-
-
-        //--------------------------------------------------
-        //3. eventListeners
-        //--------------------------------------------------
-
-        formu.addEventListener("submit", (event) => {
-
-
-            // //no envies el formulario que quiero hacer cosas antes 
-            event.preventDefault();
-
-            agregarTarea();
         });
 
+    }
 
-        //--------------------------------------------------
-        //4. Llamar a las funciones
-        //--------------------------------------------------
 
+
+    function agregarTarea() {
+
+        const nuevaTarea = txtTarea.value; //el texto del input
+
+        //tarea inválida
+        if (nuevaTarea.trim() == "") {
+            alert("Por favor, ingresa una tarea válida");
+            return;
+        }
+
+        //tarea válida
+
+        txtTarea.value = "";  //vaciamos input despues de enviar una tarea
+
+        //listaDeTareas.push(nuevaTarea);  agregamos nuevo item o tarea
+
+
+        const nuevoId = parseInt(Math.random() * 100);
+        const objetoTarea = { id: nuevoId, titulo: nuevaTarea, isCompletada: false };
+
+        listaDeTareas.push(objetoTarea);
         mostrarTareas();
 
-    </script>
+
+    };
+
+
+    function eliminarTarea(idTarea) {
+
+        listaDeTareas.forEach((tarea, index) => {
+            // alert("Eliminar tarea: ", + idTarea)
+            if (tarea.id == idTarea) {
+                const posicion = index;
+
+                listaDeTareas.splice(posicion, 1);
+            }
+        });
+
+        mostrarTareas();
+    }
+
+
+    function completarTarea(idTarea) {
+
+        //1.buscar el elemento con el id deseado 
+        const tarea = listaDeTareas.find((t) => t.id == idTarea);
+        console.log("tarea encontrada: ", tarea)
+
+        //2.cambiar valor de isCompletada
+
+        if(tarea){
+            tarea.isCompletada == !tarea.isCompletada;
+            mostrarTareas();
+        }
+        // if (tarea.isCompletada == true) {
+        //     tarea.isCompletada = false;
+        // } else {
+        //     tarea.isCompletada = true
+        // }
+
+
+       
+
+    }
+
+
+
+    //--------------------------------------------------
+    //3. eventListeners
+    //--------------------------------------------------
+
+    formu.addEventListener("submit", (event) => {
+
+
+        // //no envies el formulario que quiero hacer cosas antes 
+        event.preventDefault();
+
+        agregarTarea();
+    });
+
+
+    listaBotones.forEach((boton) => {
+        boton.addEventListener("click", () => {
+
+            const targetId = boton.dataset.tab;
+
+            const target = document.getElementById(targetId);
+
+            listaBotones.forEach(item => {
+                item.classList.remove("u-active");
+            });
+
+            boton.classList.add("u-active");
+
+            listaDePaginas.forEach(pagina => {
+                pagina.classList.remove("u-visible");
+            });
+
+            target.classList.add("u-visible");
+
+        });
+    });
+
+
+    headers.forEach((header) => {
+        header.addEventListener("click", () => {
+            const item = header.closest(".Acordeon-item");
+
+            items.forEach(item => {
+                item.classList.remove("active")
+            });
+
+            item.classList.toggle("active");
+        });
+    });
+
+
+    //--------------------------------------------------
+    //4. Llamar a las funciones
+    //--------------------------------------------------
+
+    mostrarTareas();
+
+</script>
 
 </body>
 
